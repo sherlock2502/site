@@ -1,7 +1,7 @@
 import { reviews } from "./reviews.js";
 import { works } from "./works.js";
 
-const MAIL = "yevhen.kasyan@gmail.com";
+const FORM_URL = "https://formspree.io/f/maeeedkl";
 
 const workList = document.querySelector("#work-list");
 const workEmpty = document.querySelector("#work-empty");
@@ -236,19 +236,44 @@ function setupForm() {
     dialog.close();
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const payload = {
-      name: String(data.get("name") || "").trim(),
-      contact: String(data.get("contact") || "").trim(),
-      message: String(data.get("message") || "").trim(),
-    };
-    if (!payload.name || !payload.contact || !payload.message) return;
+    const name = String(data.get("name") || "").trim();
+    const contact = String(data.get("contact") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    if (!name || !contact || !message) return;
 
-    const body = `Imię: ${payload.name}\nKontakt: ${payload.contact}\n\n${payload.message}`;
+    const submit = form.querySelector('[type="submit"]');
+    if (submit instanceof HTMLButtonElement) submit.disabled = true;
     status.dataset.state = "";
-    status.textContent = "Otwieram pocztę. Wyślij wiadomość, żebym ją dostał.";
-    window.location.href = `mailto:${MAIL}?subject=${encodeURIComponent("Nowe zapytanie ze strony")}&body=${encodeURIComponent(body)}`;
+    status.textContent = "Wysyłam…";
+
+    const payload = {
+      Imię: name,
+      "Sposób kontaktu": contact,
+      Opis: message,
+      _subject: "Nowe zapytanie ze strony",
+    };
+    if (contact.includes("@")) payload._replyto = contact;
+
+    try {
+      const response = await fetch(FORM_URL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      form.reset();
+      status.textContent = "Wysłane. Odezwę się.";
+    } catch {
+      status.dataset.state = "error";
+      status.textContent = "Nie udało się wysłać. Spróbuj jeszcze raz albo napisz na yevhen.kasyan@gmail.com.";
+    } finally {
+      if (submit instanceof HTMLButtonElement) submit.disabled = false;
+    }
   });
 }

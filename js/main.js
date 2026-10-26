@@ -29,35 +29,33 @@ if (!Array.isArray(reviews) || reviews.length === 0) {
 }
 
 setupForm();
+const lightbox = createLightbox();
 
 function renderWork(work, index) {
   const article = document.createElement("article");
   article.className = index === 0 ? "work work--feature" : "work";
 
-  const link = document.createElement(work.url ? "a" : "div");
-  link.className = "work-link";
-  if (work.url) {
-    link.href = work.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", `${work.title} — otwórz stronę`);
-  }
+  const card = document.createElement("div");
+  card.className = "work-link";
+  const photos = photosOf(work);
 
-  if (work.image || work.mobile?.length) {
+  if (photos.length > 0) {
     const shots = document.createElement("div");
     shots.className = "work-shots";
-    if (work.image) {
-      shots.append(makeImage(work.image, work.imageAlt || "", "shot-desk"));
-    }
-    if (Array.isArray(work.mobile) && work.mobile.length > 0) {
-      const phones = document.createElement("div");
-      phones.className = "shot-phones";
-      for (const shot of work.mobile) {
-        phones.append(makeImage(shot.src, shot.alt || "", "shot-phone"));
-      }
-      shots.append(phones);
-    }
-    link.append(shots);
+    const phones = document.createElement("div");
+    phones.className = "shot-phones";
+    photos.forEach((photo, photoIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = photo.kind === "phone" ? "shot-button shot-button--phone" : "shot-button";
+      button.setAttribute("aria-label", `Powiększ: ${photo.alt}`);
+      button.append(makeImage(photo.src, photo.alt, photo.kind === "phone" ? "shot-phone" : "shot-desk"));
+      button.addEventListener("click", () => lightbox.open(photos, photoIndex));
+      if (photo.kind === "phone") phones.append(button);
+      else shots.append(button);
+    });
+    if (phones.childElementCount > 0) shots.append(phones);
+    card.append(shots);
   }
 
   const row = document.createElement("div");
@@ -101,14 +99,98 @@ function renderWork(work, index) {
     body.append(tags);
   }
 
-  const go = document.createElement("p");
-  go.className = "work-go";
+  const go = document.createElement(work.url ? "a" : "p");
+  go.className = work.url ? "work-go" : "work-go work-go--soon";
   go.textContent = work.url ? "Otwórz stronę" : "Wkrótce";
+  if (work.url) {
+    go.href = work.url;
+    go.target = "_blank";
+    go.rel = "noopener noreferrer";
+  }
 
   row.append(indexEl, body, go);
-  link.append(row);
-  article.append(link);
+  card.append(row);
+  article.append(card);
   return article;
+}
+
+function photosOf(work) {
+  const photos = [];
+  if (work.image) {
+    photos.push({ src: work.image, alt: work.imageAlt || work.title, kind: "desk" });
+  }
+  if (Array.isArray(work.mobile)) {
+    for (const shot of work.mobile) {
+      photos.push({ src: shot.src, alt: shot.alt || work.title, kind: "phone" });
+    }
+  }
+  return photos;
+}
+
+function createLightbox() {
+  const dialog = document.createElement("dialog");
+  dialog.className = "lightbox";
+
+  const img = document.createElement("img");
+  img.alt = "";
+
+  const close = document.createElement("button");
+  close.type = "button";
+  close.className = "lightbox-close";
+  close.setAttribute("aria-label", "Zamknij zdjęcie");
+  close.textContent = "×";
+
+  const prev = document.createElement("button");
+  prev.type = "button";
+  prev.className = "lightbox-nav lightbox-nav--prev";
+  prev.setAttribute("aria-label", "Poprzednie zdjęcie");
+  prev.textContent = "‹";
+
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "lightbox-nav lightbox-nav--next";
+  next.setAttribute("aria-label", "Następne zdjęcie");
+  next.textContent = "›";
+
+  dialog.append(close, prev, img, next);
+  document.body.append(dialog);
+
+  let photos = [];
+  let index = 0;
+
+  function show(nextIndex) {
+    index = (nextIndex + photos.length) % photos.length;
+    img.src = photos[index].src;
+    img.alt = photos[index].alt;
+    const single = photos.length < 2;
+    prev.hidden = single;
+    next.hidden = single;
+  }
+
+  close.addEventListener("click", () => dialog.close());
+  prev.addEventListener("click", () => show(index - 1));
+  next.addEventListener("click", () => show(index + 1));
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      show(index + 1);
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      show(index - 1);
+    }
+  });
+
+  return {
+    open(list, start) {
+      photos = list;
+      show(start);
+      dialog.showModal();
+    },
+  };
 }
 
 function renderReview(review) {

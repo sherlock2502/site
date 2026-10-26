@@ -325,6 +325,11 @@ h1 em {
   color: var(--accent);
   font-size: 0.95rem;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+a.work-go:visited {
+  color: var(--accent);
 }
 
 .work-go::after {
@@ -334,15 +339,15 @@ h1 em {
   transition: transform 160ms ease;
 }
 
-.work-link:hover .work-go::after {
+.work-go:hover::after {
   transform: translateX(4px);
 }
 
-.work-link:not(a) .work-go {
+.work-go--soon {
   color: var(--faint);
 }
 
-.work-link:not(a) .work-go::after {
+.work-go--soon::after {
   content: none;
 }
 
@@ -534,9 +539,81 @@ address {
   gap: 0.55rem;
 }
 
-.shot-phone {
+.shot-button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  font: inherit;
+}
+
+.shot-button--phone {
   width: 7.4rem;
+}
+
+.shot-phone {
+  width: 100%;
   aspect-ratio: 390 / 740;
+}
+
+.lightbox {
+  width: min(92vw, 72rem);
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgba(8, 10, 12, 0.9);
+}
+
+.lightbox img {
+  display: block;
+  width: auto;
+  max-width: min(92vw, 72rem);
+  max-height: 86vh;
+  margin: 0 auto;
+  object-fit: contain;
+  border: 0;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  position: fixed;
+  border: 0;
+  background: #1a1e24;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lightbox-close {
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.lightbox-nav {
+  top: 50%;
+  width: 2.6rem;
+  height: 3.2rem;
+  transform: translateY(-50%);
+}
+
+.lightbox-nav--prev {
+  left: 0.8rem;
+}
+
+.lightbox-nav--next {
+  right: 0.8rem;
 }
 
 .review-list {
@@ -680,8 +757,13 @@ address {
     width: 100%;
   }
 
+  .shot-button--phone,
   .shot-phone {
     width: calc(50% - 0.3rem);
+  }
+
+  .shot-phone {
+    width: 100%;
   }
 
   .price-value {

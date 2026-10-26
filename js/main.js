@@ -154,7 +154,7 @@ function setupForm() {
     dialog.close();
   });
 
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const payload = {
@@ -164,35 +164,9 @@ function setupForm() {
     };
     if (!payload.name || !payload.contact || !payload.message) return;
 
-    const submit = form.querySelector('[type="submit"]');
-    if (submit instanceof HTMLButtonElement) submit.disabled = true;
+    const body = `Imię: ${payload.name}\nKontakt: ${payload.contact}\n\n${payload.message}`;
     status.dataset.state = "";
-    status.textContent = "Wysyłam…";
-
-    try {
-      const response = await fetch(`https://formsubmit.co/ajax/${MAIL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          ...payload,
-          _subject: "Nowe zapytanie ze strony",
-          _template: "table",
-        }),
-      });
-      if (!response.ok) throw new Error(String(response.status));
-      form.reset();
-      status.textContent = "Wysłane. Odezwę się.";
-      window.setTimeout(() => dialog.close(), 900);
-    } catch {
-      status.dataset.state = "error";
-      status.textContent = "Nie wyszło z tej strony. Otwieram pocztę.";
-      const body = `Imię: ${payload.name}\nKontakt: ${payload.contact}\n\n${payload.message}`;
-      window.location.href = `mailto:${MAIL}?subject=${encodeURIComponent("Nowe zapytanie ze strony")}&body=${encodeURIComponent(body)}`;
-    } finally {
-      if (submit instanceof HTMLButtonElement) submit.disabled = false;
-    }
+    status.textContent = "Otwieram pocztę. Wyślij wiadomość, żebym ją dostał.";
+    window.location.href = `mailto:${MAIL}?subject=${encodeURIComponent("Nowe zapytanie ze strony")}&body=${encodeURIComponent(body)}`;
   });
 }

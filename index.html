@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sherlock — strony dla małego biznesu</title>
+    <meta
+      name="description"
+      content="Tworzę strony internetowe dla małego biznesu: barbershopy, warsztaty, lokalne sklepy. Szybko, solidnie i taniej niż u większości."
+    />
+    <meta name="theme-color" content="#0e0d0c" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Outfit:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#tresc">Przejdź do treści</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#start">sherlock</a>
+        <nav class="nav" aria-label="Sekcje strony">
+          <a href="#prace">Prace</a>
+          <a href="#o-mnie">O mnie</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="tresc">
+      <section class="hero wrap" id="start">
+        <p class="eyebrow">Strony internetowe</p>
+        <h1>Strona, która <em>zdobywa klientów.</em></h1>
+        <p class="lead">
+          Dla barbershopów, warsztatów samochodowych i lokalnych sklepów.
+          Szybko, solidnie i taniej niż u większości.
+        </p>
+        <div class="actions">
+          <a class="button" href="mailto:yevhen.kasyan@gmail.com">Napisz do mnie</a>
+          <a class="button button-quiet" href="#prace">Zobacz prace</a>
+        </div>
+      </section>
+
+      <section class="section wrap" id="prace">
+        <div class="section-kicker">
+          <h2>Prace</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lead">Strony zrobione dla klientów.</p>
+          <div id="work-list" class="work-list"></div>
+          <p id="work-empty" class="empty" hidden>Kolejne prace pojawią się tutaj.</p>
+        </div>
+      </section>
+
+      <section class="section wrap" id="o-mnie">
+        <div class="section-kicker">
+          <h2>O mnie</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Tworzę strony internetowe dla małego biznesu — barbershopów,
+            warsztatów samochodowych, lokalnych sklepów i innych.
+          </p>
+          <p>
+            Taniej niż u większości, szybko i solidnie. Bez zbędnych dodatków —
+            po prostu strona, która działa i pomaga zdobywać klientów.
+          </p>
+        </div>
+      </section>
+
+      <section class="section wrap" id="kontakt">
+        <div class="section-kicker">
+          <h2>Kontakt</h2>
+        </div>
+        <div class="section-body">
+          <p class="section-lead">Napisz, zadzwoń albo odezwij się na Telegramie.</p>
+          <address>
+            <ul class="contact-list">
+              <li>
+                <a href="tel:+48733748592">
+                  <span class="contact-label">Telefon</span>
+                  <span class="contact-value">+48 733 748 592</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:yevhen.kasyan@gmail.com">
+                  <span class="contact-label">E-mail</span>
+                  <span class="contact-value">yevhen.kasyan@gmail.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://t.me/sher_lock2502" target="_blank" rel="noopener noreferrer">
+                  <span class="contact-label">Telegram</span>
+                  <span class="contact-value">@sher_lock2502</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/sherlock2502" target="_blank" rel="noopener noreferrer">
+                  <span class="contact-label">GitHub</span>
+                  <span class="contact-value">sherlock2502</span>
+                </a>
+              </li>
+            </ul>
+          </address>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>sherlock</p>
+        <p>Strony dla małego biznesu</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

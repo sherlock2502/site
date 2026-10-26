@@ -1,8 +1,10 @@
 {
   "name": "site",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite --open --port 5173",
+    "build": "vite build && cp -r images dist/images",
     "preview": "vite preview --port 4173"
   },
   "devDependencies": {

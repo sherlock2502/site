@@ -7,8 +7,9 @@
 // url      — adres. Zostaw pusty, jeśli strona jeszcze nie stoi
 // year     — rok
 // place    — miasto, opcjonalnie
-// image    — podgląd, opcjonalnie. Ścieżka względem strony, np. "./images/nazwa.jpg"
+// image    — podgląd na komputerze, opcjonalnie
 // imageAlt — krótki opis obrazka
+// mobile   — zrzuty z telefonu, opcjonalnie: [{ src, alt }]
 
 export const works = [
   {
@@ -20,6 +21,16 @@ export const works = [
     year: "2026",
     place: "Kraków",
     image: "./images/glowa-broda.jpg",
-    imageAlt: "Podgląd strony głównej Głowa i Broda",
+    imageAlt: "Podgląd strony głównej Głowa i Broda na komputerze",
+    mobile: [
+      {
+        src: "./images/glowa-broda-mobile-1.jpg",
+        alt: "Strona Głowa i Broda na telefonie, ekran powitalny",
+      },
+      {
+        src: "./images/glowa-broda-mobile-2.jpg",
+        alt: "Strona Głowa i Broda na telefonie, realizacje",
+      },
+    ],
   },
 ];

@@ -1,19 +1,34 @@
+import { reviews } from "./reviews.js";
 import { works } from "./works.js";
 
-const list = document.querySelector("#work-list");
-const empty = document.querySelector("#work-empty");
+const MAIL = "yevhen.kasyan@gmail.com";
 
-if (!list || !empty) {
-  throw new Error("Brakuje listy prac na stronie.");
+const workList = document.querySelector("#work-list");
+const workEmpty = document.querySelector("#work-empty");
+const reviewList = document.querySelector("#review-list");
+const reviewEmpty = document.querySelector("#review-empty");
+
+if (!workList || !workEmpty || !reviewList || !reviewEmpty) {
+  throw new Error("Brakuje sekcji na stronie.");
 }
 
 if (!Array.isArray(works) || works.length === 0) {
-  empty.hidden = false;
+  workEmpty.hidden = false;
 } else {
   for (const [index, work] of works.entries()) {
-    list.append(renderWork(work, index));
+    workList.append(renderWork(work, index));
   }
 }
+
+if (!Array.isArray(reviews) || reviews.length === 0) {
+  reviewEmpty.hidden = false;
+} else {
+  for (const review of reviews) {
+    reviewList.append(renderReview(review));
+  }
+}
+
+setupForm();
 
 function renderWork(work, index) {
   const article = document.createElement("article");
@@ -28,16 +43,21 @@ function renderWork(work, index) {
     link.setAttribute("aria-label", `${work.title} — otwórz stronę`);
   }
 
-  if (work.image) {
-    const media = document.createElement("div");
-    media.className = "work-media";
-    const img = document.createElement("img");
-    img.src = work.image;
-    img.alt = work.imageAlt || "";
-    img.width = 1440;
-    img.height = 680;
-    media.append(img);
-    link.append(media);
+  if (work.image || work.mobile?.length) {
+    const shots = document.createElement("div");
+    shots.className = "work-shots";
+    if (work.image) {
+      shots.append(makeImage(work.image, work.imageAlt || "", "shot-desk"));
+    }
+    if (Array.isArray(work.mobile) && work.mobile.length > 0) {
+      const phones = document.createElement("div");
+      phones.className = "shot-phones";
+      for (const shot of work.mobile) {
+        phones.append(makeImage(shot.src, shot.alt || "", "shot-phone"));
+      }
+      shots.append(phones);
+    }
+    link.append(shots);
   }
 
   const row = document.createElement("div");
@@ -89,4 +109,90 @@ function renderWork(work, index) {
   link.append(row);
   article.append(link);
   return article;
+}
+
+function renderReview(review) {
+  const item = document.createElement("article");
+  item.className = "review";
+
+  const text = document.createElement("p");
+  text.className = "review-text";
+  text.textContent = review.text;
+
+  const name = document.createElement("p");
+  name.className = "review-name";
+  name.textContent = [review.name, review.place].filter(Boolean).join(" · ");
+
+  item.append(text, name);
+  return item;
+}
+
+function makeImage(src, alt, className) {
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = alt;
+  img.className = className;
+  return img;
+}
+
+function setupForm() {
+  const dialog = document.querySelector("#zapytanie");
+  const form = document.querySelector("#order-form");
+  const status = document.querySelector("#form-status");
+  if (!(dialog instanceof HTMLDialogElement) || !form || !status) return;
+
+  for (const button of document.querySelectorAll("[data-open-form]")) {
+    button.addEventListener("click", () => {
+      status.textContent = "";
+      status.dataset.state = "";
+      dialog.showModal();
+      form.querySelector("input")?.focus();
+    });
+  }
+
+  form.querySelector("[data-close-form]")?.addEventListener("click", () => {
+    dialog.close();
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") || "").trim(),
+      contact: String(data.get("contact") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+    };
+    if (!payload.name || !payload.contact || !payload.message) return;
+
+    const submit = form.querySelector('[type="submit"]');
+    if (submit instanceof HTMLButtonElement) submit.disabled = true;
+    status.dataset.state = "";
+    status.textContent = "Wysyłam…";
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${MAIL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...payload,
+          _subject: "Nowe zapytanie ze strony",
+          _template: "table",
+        }),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      form.reset();
+      status.textContent = "Wysłane. Odezwę się.";
+      window.setTimeout(() => dialog.close(), 900);
+    } catch {
+      status.dataset.state = "error";
+      status.textContent = "Nie wyszło z tej strony. Otwieram pocztę.";
+      const body = `Imię: ${payload.name}\nKontakt: ${payload.contact}\n\n${payload.message}`;
+      window.location.href = `mailto:${MAIL}?subject=${encodeURIComponent("Nowe zapytanie ze strony")}&body=${encodeURIComponent(body)}`;
+    } finally {
+      if (submit instanceof HTMLButtonElement) submit.disabled = false;
+    }
+  });
 }

@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sherlock — strony dla małego biznesu</title>
+    <title>Yevhen Kasyan — strony dla małego biznesu</title>
     <meta
       name="description"
-      content="Tworzę strony internetowe dla małego biznesu: barbershopy, warsztaty, lokalne sklepy. Szybko, solidnie i taniej niż u większości."
+      content="Yevhen Kasyan robi strony internetowe dla małego biznesu. Prosta wizytówka od 500 zł, gotowa w 3–5 dni."
     />
-    <meta name="theme-color" content="#0e0d0c" />
+    <meta name="theme-color" content="#121416" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,25 +23,63 @@
 
     <header class="site-header">
       <div class="wrap header-inner">
-        <a class="brand" href="#start">sherlock</a>
+        <a class="brand" href="#o-mnie">sherlock</a>
         <nav class="nav" aria-label="Sekcje strony">
-          <a href="#prace">Prace</a>
           <a href="#o-mnie">O mnie</a>
-          <a href="#kontakt">Kontakt</a>
+          <a href="#prace">Prace</a>
+          <a href="#opinie">Opinie</a>
+          <button class="button nav-button" type="button" data-open-form>Kontakt</button>
         </nav>
       </div>
     </header>
 
     <main id="tresc">
-      <section class="hero wrap" id="start">
-        <p class="eyebrow">Strony internetowe</p>
-        <h1>Strona, która <em>zdobywa klientów.</em></h1>
-        <p class="lead">
-          Dla barbershopów, warsztatów samochodowych i lokalnych sklepów.
-          Szybko, solidnie i taniej niż u większości.
+      <section class="about wrap" id="o-mnie">
+        <p class="eyebrow">O mnie</p>
+        <h1>Yevhen Kasyan</h1>
+        <div class="prose-tight">
+          <p>
+            Nazywam się Yevhen Kasyan. Robię strony internetowe dla małego
+            biznesu — barbershopów, warsztatów samochodowych, lokalnych sklepów
+            i podobnych miejsc.
+          </p>
+          <p>
+            Zamiast długich projektów i wysokich cen od agencji stawiam na
+            proste, działające strony, które od razu pokazują ofertę i pomagają
+            zdobywać klientów. Szybko, solidnie i bez zbędnych rzeczy.
+          </p>
+        </div>
+
+        <h2 class="block-title">Jak to wygląda w praktyce</h2>
+        <ol class="steps">
+          <li>Krótka rozmowa — co potrzebujesz i dla kogo.</li>
+          <li>Propozycja struktury i wyglądu.</li>
+          <li>Budowa strony.</li>
+          <li>Poprawki.</li>
+          <li>Publikacja i wsparcie po starcie.</li>
+        </ol>
+        <p class="note">
+          Zazwyczaj od pierwszej wiadomości do gotowej strony mija 3–5 dni.
+        </p>
+
+        <h2 class="block-title">Orientacyjnie</h2>
+        <ul class="prices">
+          <li>
+            <span>Prosta strona wizytówka</span>
+            <span class="price-value">od 500 zł netto</span>
+          </li>
+          <li>
+            <span>Strona z galerią, zespołem i formularzem</span>
+            <span class="price-value">od 800–1000 zł</span>
+          </li>
+        </ul>
+        <p class="note">Dokładna cena po krótkiej rozmowie — zależy od zakresu.</p>
+        <p class="note">
+          Jeśli chcesz stronę, która nie będzie wisieć miesiącami i nie zje
+          połowy budżetu — napisz.
         </p>
         <div class="actions">
-          <a class="button" href="mailto:yevhen.kasyan@gmail.com">Napisz do mnie</a>
+          <button class="button" type="button" data-open-form>Napisz</button>
           <a class="button button-quiet" href="#prace">Zobacz prace</a>
         </div>
       </section>
@@ -57,19 +95,13 @@
         </div>
       </section>
 
-      <section class="section wrap" id="o-mnie">
+      <section class="section wrap" id="opinie">
         <div class="section-kicker">
-          <h2>O mnie</h2>
+          <h2>Opinie</h2>
         </div>
-        <div class="prose">
-          <p>
-            Tworzę strony internetowe dla małego biznesu — barbershopów,
-            warsztatów samochodowych, lokalnych sklepów i innych.
-          </p>
-          <p>
-            Taniej niż u większości, szybko i solidnie. Bez zbędnych dodatków —
-            po prostu strona, która działa i pomaga zdobywać klientów.
-          </p>
+        <div class="section-body">
+          <div id="review-list" class="review-list"></div>
+          <p id="review-empty" class="empty" hidden>Opinie pojawią się tutaj.</p>
         </div>
       </section>
 
@@ -107,16 +139,47 @@
               </li>
             </ul>
           </address>
+          <div class="actions">
+            <button class="button" type="button" data-open-form>Wyślij zapytanie</button>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="wrap footer-inner">
-        <p>sherlock</p>
+        <p>Yevhen Kasyan</p>
         <p>Strony dla małego biznesu</p>
       </div>
     </footer>
+
+    <dialog class="modal" id="zapytanie">
+      <form id="order-form" method="dialog">
+        <h2>Nowe zapytanie</h2>
+        <label>
+          Imię
+          <input name="name" autocomplete="name" required maxlength="80" />
+        </label>
+        <label>
+          Sposób kontaktu
+          <input
+            name="contact"
+            required
+            maxlength="120"
+            placeholder="Telefon, e-mail albo Telegram"
+          />
+        </label>
+        <label>
+          Krótki opis zamówienia
+          <textarea name="message" required maxlength="2000"></textarea>
+        </label>
+        <p class="form-status" id="form-status" role="status"></p>
+        <div class="modal-actions">
+          <button class="button button-quiet" type="button" data-close-form>Zamknij</button>
+          <button class="button" type="submit">Wyślij</button>
+        </div>
+      </form>
+    </dialog>
 
     <script type="module" src="./js/main.js"></script>
   </body>

@@ -9,7 +9,7 @@ const reviewList = document.querySelector("#review-list");
 const reviewEmpty = document.querySelector("#review-empty");
 
 if (!workList || !workEmpty || !reviewList || !reviewEmpty) {
-  throw new Error("Brakuje sekcji na stronie.");
+  throw new Error("Brakuje sekcji na web stronie.");
 }
 
 if (!Array.isArray(works) || works.length === 0) {
@@ -101,7 +101,7 @@ function renderWork(work, index) {
 
   const go = document.createElement(work.url ? "a" : "p");
   go.className = work.url ? "work-go" : "work-go work-go--soon";
-  go.textContent = work.url ? "Otwórz stronę" : "Wkrótce";
+  go.textContent = work.url ? "Otwórz web stronę" : "Wkrótce";
   if (work.url) {
     go.href = work.url;
     go.target = "_blank";
@@ -253,7 +253,7 @@ function setupForm() {
       Imię: name,
       "Sposób kontaktu": contact,
       Opis: message,
-      _subject: "Nowe zapytanie ze strony",
+      _subject: "Nowe pytanie z web strony",
     };
     if (contact.includes("@")) payload._replyto = contact;
 

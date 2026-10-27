@@ -1,16 +1,18 @@
 :root {
-  --bg: #121416;
-  --bg-raise: #1c2026;
-  --ink: #e7eaee;
-  --muted: #a3aab3;
-  --faint: #7e868f;
-  --line: rgba(231, 234, 238, 0.14);
-  --accent: #d5dbe2;
-  --accent-ink: #14171b;
+  --bg: #f4f6f8;
+  --bg-raise: #e7ebf0;
+  --surface: #fffcf8;
+  --ink: #1a2740;
+  --muted: #3d4d63;
+  --faint: #5c6b80;
+  --line: rgba(26, 39, 64, 0.14);
+  --accent: #e08a14;
+  --accent-hover: #c6750c;
+  --accent-ink: #1a1408;
   --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
-  --sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+  --sans: "Source Sans 3", "Segoe UI", sans-serif;
   --header: 4.25rem;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 *,
@@ -27,11 +29,11 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--sans);
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: 1.125rem;
+  line-height: 1.6;
   color: var(--ink);
   background:
-    radial-gradient(ellipse 70% 36% at 0% -8%, rgba(190, 200, 210, 0.07), transparent 46%),
+    radial-gradient(ellipse 70% 36% at 100% -10%, rgba(224, 138, 20, 0.08), transparent 42%),
     var(--bg);
 }
 
@@ -129,7 +131,7 @@ img {
 
 .eyebrow {
   margin: 0 0 1.15rem;
-  color: var(--accent);
+  color: var(--faint);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -140,7 +142,7 @@ h1 {
   margin: 0;
   max-width: 12ch;
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: clamp(2.35rem, 6.6vw, 5.15rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -149,15 +151,15 @@ h1 {
 
 h1 em {
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .lead {
-  max-width: 34rem;
+  max-width: 68ch;
   margin: 1.6rem 0 0;
   color: var(--muted);
-  font-size: 1.22rem;
-  line-height: 1.5;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 .actions {
@@ -189,7 +191,7 @@ h1 em {
 }
 
 .button:hover {
-  background: #eef2f5;
+  background: var(--accent-hover);
 }
 
 .button-quiet {
@@ -215,13 +217,13 @@ h1 em {
   margin: 0;
   font-family: var(--serif);
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 .section-lead {
-  max-width: 34rem;
+  max-width: 68ch;
   margin: 0 0 1.6rem;
   color: var(--muted);
 }
@@ -253,7 +255,7 @@ h1 em {
   object-fit: cover;
   object-position: top center;
   border: 1px solid var(--line);
-  background: #161412;
+  background: var(--bg-raise);
 }
 
 .work-row {
@@ -280,7 +282,7 @@ h1 em {
 .work-title {
   margin: 0;
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.45rem;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -297,7 +299,7 @@ h1 em {
 }
 
 .work-summary {
-  max-width: 40rem;
+  max-width: 68ch;
   margin: 0.6rem 0 0;
   color: var(--muted);
 }
@@ -322,14 +324,14 @@ h1 em {
 
 .work-go {
   margin: 0.45rem 0 0;
-  color: var(--accent);
+  color: var(--ink);
   font-size: 0.95rem;
   white-space: nowrap;
   text-decoration: none;
 }
 
 a.work-go:visited {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .work-go::after {
@@ -352,9 +354,9 @@ a.work-go:visited {
 }
 
 .prose {
-  max-width: 38rem;
-  font-size: 1.175rem;
-  line-height: 1.65;
+  max-width: 68ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 .prose p {
@@ -388,7 +390,9 @@ address {
 }
 
 .contact-list a:hover .contact-value {
-  color: var(--accent);
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .contact-label {
@@ -432,7 +436,7 @@ address {
 }
 
 .prose-tight {
-  max-width: 40rem;
+  max-width: 68ch;
   margin-top: 1.25rem;
 }
 
@@ -440,7 +444,7 @@ address {
   margin: 0;
   color: var(--muted);
   font-size: 1.125rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .prose-tight p + p {
@@ -451,15 +455,23 @@ address {
   margin: 2.4rem 0 0.9rem;
   font-family: var(--serif);
   font-size: 1.7rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.03em;
+}
+
+#ceny {
+  scroll-margin-top: calc(var(--header) + 1rem);
+}
+
+#prace {
+  scroll-margin-top: calc(50vh - 4.25rem);
 }
 
 .steps {
   margin: 0;
   padding: 0;
   list-style: none;
-  max-width: 40rem;
+  max-width: 68ch;
   counter-reset: step;
 }
 
@@ -506,7 +518,7 @@ address {
 }
 
 .note {
-  max-width: 40rem;
+  max-width: 68ch;
   margin: 1rem 0 0;
   color: var(--muted);
 }
@@ -526,7 +538,7 @@ address {
   object-fit: cover;
   object-position: top center;
   border: 1px solid var(--line);
-  background: #0e1013;
+  background: var(--bg-raise);
 }
 
 .shot-desk {
@@ -588,8 +600,8 @@ address {
 .lightbox-nav {
   position: fixed;
   border: 0;
-  background: #1a1e24;
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--bg);
   font: inherit;
   cursor: pointer;
 }
@@ -649,7 +661,7 @@ address {
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 2px;
-  background: #1a1e24;
+  background: var(--surface);
   color: var(--ink);
 }
 
@@ -667,7 +679,7 @@ address {
   margin: 0;
   font-family: var(--serif);
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.03em;
 }
 
@@ -684,7 +696,7 @@ address {
   padding: 0.7rem 0.75rem;
   border: 1px solid var(--line);
   border-radius: 2px;
-  background: #121416;
+  background: #fff;
   color: var(--ink);
   font: inherit;
 }
@@ -707,7 +719,7 @@ address {
 }
 
 .form-status[data-state="error"] {
-  color: #e7b2b2;
+  color: #9f2d2d;
 }
 
 @media (max-width: 760px) {
@@ -778,6 +790,10 @@ address {
     grid-template-columns: 1fr;
     gap: 1.1rem;
     padding: 2.75rem 0;
+  }
+
+  #prace {
+    scroll-margin-top: calc(50vh - 2.75rem);
   }
 
   .work-row {

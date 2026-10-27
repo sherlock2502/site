@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yevhen Kasyan — strony dla małego biznesu</title>
+    <title>Yevhen Kasyan — web strony dla małych firm</title>
     <meta
       name="description"
-      content="Yevhen Kasyan robi strony internetowe dla małego biznesu. Prosta wizytówka od 500 zł, gotowa w 3–5 dni."
+      content="Web strony internetowe dla małych firm. Prosta web strona wizytówka od 500 zł, gotowa w 3–5 dni."
     />
-    <meta name="theme-color" content="#121416" />
+    <meta name="theme-color" content="#f4f6f8" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Outfit:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..600;1,9..144,500..600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
@@ -24,11 +24,12 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="brand" href="#o-mnie">sherlock</a>
-        <nav class="nav" aria-label="Sekcje strony">
+        <nav class="nav" aria-label="Sekcje web strony">
           <a href="#o-mnie">O mnie</a>
+          <a href="#ceny">Ceny</a>
           <a href="#prace">Prace</a>
-          <a href="#opinie">Opinie</a>
-          <button class="button nav-button" type="button" data-open-form>Kontakt</button>
+          <a href="#recenzje">Recenzje</a>
+          <button class="button nav-button" type="button" data-open-form>Wyślij pytanie</button>
         </nav>
       </div>
     </header>
@@ -39,47 +40,57 @@
         <h1>Yevhen Kasyan</h1>
         <div class="prose-tight">
           <p>
-            Nazywam się Yevhen Kasyan. Robię strony internetowe dla małego
-            biznesu — barbershopów, warsztatów samochodowych, lokalnych sklepów
-            i podobnych miejsc.
+            Web strony internetowe dla małych firm — barbershopów, warsztatów
+            samochodowych, lokalnych sklepów i podobnych miejsc.
           </p>
           <p>
-            Zamiast długich projektów i wysokich cen od agencji stawiam na
-            proste, działające strony, które od razu pokazują ofertę i pomagają
-            zdobywać klientów. Szybko, solidnie i bez zbędnych rzeczy.
+            Zamiast długich projektów i wysokich cen od agencji powstają proste,
+            działające web strony, które od razu pokazują ofertę i pomagają
+            zdobywać klientów.
           </p>
+          <p>Szybko, solidnie i prosto.</p>
         </div>
 
         <h2 class="block-title">Jak to wygląda w praktyce</h2>
         <ol class="steps">
-          <li>Krótka rozmowa — co potrzebujesz i dla kogo.</li>
-          <li>Propozycja struktury i wyglądu.</li>
-          <li>Budowa strony.</li>
-          <li>Poprawki.</li>
-          <li>Publikacja i wsparcie po starcie.</li>
+          <li>
+            <span>
+              <strong>Etap przygotowawczy</strong><br>
+              Od pierwszej wiadomości do pierwszego prototypu — 1–2 dni.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Praca nad projektem</strong><br>
+              Wprowadzanie i uzgadnianie poprawek — 2–3 dni.<br>
+              Zatwierdzenie finalnej wersji przed publikacją — 1 dzień.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Uruchomienie projektu</strong><br>
+              Techniczne dopracowanie, uruchomienie i debugowanie — 1–2 dni.
+            </span>
+          </li>
         </ol>
         <p class="note">
-          Zazwyczaj od pierwszej wiadomości do gotowej strony mija 3–5 dni.
+          Rzeczywiste terminy zależą od złożoności zadania i Twoich potrzeb.
         </p>
 
-        <h2 class="block-title">Orientacyjnie</h2>
+        <h2 class="block-title" id="ceny">Przybliżona cena moich usług</h2>
         <ul class="prices">
           <li>
-            <span>Prosta strona wizytówka</span>
+            <span>Prosta web strona wizytówka</span>
             <span class="price-value">od 500 zł netto</span>
           </li>
           <li>
-            <span>Strona z galerią, zespołem i formularzem</span>
+            <span>Web strona z galerią, zespołem i formularzem</span>
             <span class="price-value">od 800–1000 zł</span>
           </li>
         </ul>
         <p class="note">Dokładna cena po krótkiej rozmowie — zależy od zakresu.</p>
-        <p class="note">
-          Jeśli chcesz stronę, która nie będzie wisieć miesiącami i nie zje
-          połowy budżetu — napisz.
-        </p>
         <div class="actions">
-          <button class="button" type="button" data-open-form>Napisz</button>
+          <button class="button" type="button" data-open-form>Wyślij pytanie</button>
           <a class="button button-quiet" href="#prace">Zobacz prace</a>
         </div>
       </section>
@@ -89,19 +100,19 @@
           <h2>Prace</h2>
         </div>
         <div class="section-body">
-          <p class="section-lead">Strony zrobione dla klientów.</p>
+          <p class="section-lead">Web strony zrobione dla klientów.</p>
           <div id="work-list" class="work-list"></div>
           <p id="work-empty" class="empty" hidden>Kolejne prace pojawią się tutaj.</p>
         </div>
       </section>
 
-      <section class="section wrap" id="opinie">
+      <section class="section wrap" id="recenzje">
         <div class="section-kicker">
-          <h2>Opinie</h2>
+          <h2>Recenzje</h2>
         </div>
         <div class="section-body">
           <div id="review-list" class="review-list"></div>
-          <p id="review-empty" class="empty" hidden>Opinie pojawią się tutaj.</p>
+          <p id="review-empty" class="empty" hidden>Recenzje pojawią się tutaj.</p>
         </div>
       </section>
 
@@ -110,7 +121,7 @@
           <h2>Kontakt</h2>
         </div>
         <div class="section-body">
-          <p class="section-lead">Napisz, zadzwoń albo odezwij się na Telegramie.</p>
+          <p class="section-lead">Napisz albo zadzwoń.</p>
           <address>
             <ul class="contact-list">
               <li>
@@ -125,22 +136,10 @@
                   <span class="contact-value">yevhen.kasyan@gmail.com</span>
                 </a>
               </li>
-              <li>
-                <a href="https://t.me/sher_lock2502" target="_blank" rel="noopener noreferrer">
-                  <span class="contact-label">Telegram</span>
-                  <span class="contact-value">@sher_lock2502</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/sherlock2502" target="_blank" rel="noopener noreferrer">
-                  <span class="contact-label">GitHub</span>
-                  <span class="contact-value">sherlock2502</span>
-                </a>
-              </li>
             </ul>
           </address>
           <div class="actions">
-            <button class="button" type="button" data-open-form>Wyślij zapytanie</button>
+            <button class="button" type="button" data-open-form>Wyślij pytanie</button>
           </div>
         </div>
       </section>
@@ -149,7 +148,7 @@
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <p>Yevhen Kasyan</p>
-        <p>Strony dla małego biznesu</p>
+        <p>Web strony dla małych firm</p>
       </div>
     </footer>
 
@@ -166,7 +165,7 @@
             name="contact"
             required
             maxlength="120"
-            placeholder="Telefon, e-mail albo Telegram"
+            placeholder="Telefon albo e-mail"
           />
         </label>
         <label>
